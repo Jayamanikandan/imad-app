@@ -6,7 +6,7 @@ var app = express();
 app.use(morgan('combined'));
 
 var articleOne = {
-    title:"Article 1One1 | Jayamanikandan",
+    title:"Article One (1) | Jayamanikandan",
     heading:"Article One",
     date:"Feb 15, 2018",
     content:`
