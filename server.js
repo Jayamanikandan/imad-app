@@ -5,22 +5,35 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title:"Article One (1) | Jayamanikandan",
-    heading:"Article One",
-    date:"Feb 15, 2018",
-    content:`
-        <p>
-            This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. 
-        </p>
-        <p>
-            This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. 
-        </p>
-        <p>
-            This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. This is the content for my first article. 
-        </p>
-    `
-    }
+var articles = 
+    {
+        'article-one':{
+                        title:"Article One | Jayamanikandan",
+                        heading:"Article One",
+                        date:"Feb 15, 2018",
+                        content:`
+                        <p>
+                            This is the content for my first article. 
+                        </p>`},
+        'article-two':{
+                        title:"Article Two | Jayamanikandan",
+                        heading:"Article Two",
+                        date:"Feb 20, 2018",
+                        content:`
+                        <p>
+                            This is the content for my second article. This is the content for my second article. 
+                        </p>`
+        },
+        'article-three':{
+                        title:"Article Three | Jayamanikandan",
+                        heading:"Article Three",
+                        date:"Feb 25, 2018",
+                        content:`
+                        <p>
+                            This is the content for my third article. This is the content for my third article. This is the content for my third article. 
+                        </p>`
+        }
+    };
 
 function createTemplate(data)
 {
@@ -68,9 +81,12 @@ app.get('/ui/style.css', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
-
-app.get('/article-one', function(req,res){
-  res.send(createTemplate(articleOne1));
+/*
+    ":<parameter name>" is a feature of "Express framework", it will try to match param name with the variable
+*/
+app.get('/:articleName', function(req,res){
+    var articleName = req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 }
 );
 
