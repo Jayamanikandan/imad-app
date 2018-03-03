@@ -6,7 +6,7 @@ var pool = require('pg').Pool;
 var dbconfig={
     user:'jayamanikandan',
     database:'jayamanikandan',
-    host:'localhost',
+    host:'db.imad.hasura-app.io',
     port:'5432',
     password:process.env.DB_PASSWORD
 }
@@ -121,7 +121,7 @@ app.get('/:articleName', function(req,res){
 );*/
 
 app.get('/articles/:articleName', function(req,res){
-    pool.query("SELECT * FROM article WHERE title='" + req.params.articleName + "'", function(err,result)
+    pool.query("SELECT * FROM Article WHERE title='" + req.params.articleName + "'", function(err,result)
         {
             if(err)
             {
